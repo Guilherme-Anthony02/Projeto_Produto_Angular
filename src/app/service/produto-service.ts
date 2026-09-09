@@ -11,36 +11,33 @@ export class ProdutoService {
   constructor(private http: HttpClient) {}
 
   adicionarProduto(produto: Produto): Observable<Produto> {
-    const urlApi = 'http://127.0.0.1:8000/produto/';
+    const urlApi = 'http://127.0.0.1:8000/produtos/';
 
     return this.http.post<Produto>(urlApi, produto);
   }
 
   listarProdutos(): Observable<Produto[]> {
-    const urlApi = 'http://127.0.0.1:8000/produto/';
+    const urlApi = 'http://127.0.0.1:8000/produtos/';
 
     return this.http.get<Produto[]>(urlApi);
   }
 
-  listarProduto(idProduto: number): Observable<Produto> {
-    const urlApi = `http://127.0.0.1:8000/produto/${idProduto}`;
+  listarProduto(idproduto: number): Observable<Produto> {
+    const urlApi = `http://127.0.0.1:8000/produtos/${idproduto}`;
 
     return this.http.get<Produto>(urlApi);
   }
 
-  excluirProduto(produto: Produto): Observable<Produto> {
-    const urlApi = `http://127.0.0.1:8000/produto/${produto.idproduto}`;
+  excluirProduto(produtos: Produto): Observable<Produto> {
+    const urlApi = `http://127.0.0.1:8000/produtos/${produtos.idproduto}`;
 
     return this.http.delete<Produto>(urlApi);
   }
 
-  exluirProduto(produto: Produto): Observable<Produto> {
-    return this.excluirProduto(produto);
-  }
 
-  alterarProduto(produto: Produto): Observable<Produto> {
-    const urlApi = `http://127.0.0.1:8000/produto/${produto.idproduto}`;
+  alterarProduto(produtos: Produto): Observable<Produto> {
+    const urlApi = `http://127.0.0.1:8000/produtos/${produtos.idproduto}`;
 
-    return this.http.put<Produto>(urlApi, produto);
+    return this.http.put<Produto>(urlApi, produtos);
   }
 }
