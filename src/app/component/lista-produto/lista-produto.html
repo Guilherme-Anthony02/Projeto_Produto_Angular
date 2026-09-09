@@ -1,11 +1,11 @@
 <div id="div-lista">
-    <h2>Lista Atleta</h2>
+    <h2>Lista de Produtos</h2>
 
       <div id="lista-produto">
-        @for (elem of listaProdutos(); track elem.id) {
+        @for (elem of listaProdutos(); track elem.idproduto) {
         <div class="item-produto">
             <span class="dados-produto">
-                {{elem.id}} - {{elem.produto}} - {{elem.descricao_produto}} - {{elem.valor_unitario}} 
+                {{elem.idproduto}} - {{elem.produto}} - {{elem.descricao_produto}} - {{elem.valor_unitario}} 
             </span>
             <span class="links-lista">
                 <a class="lnk-editar" (click)="buscarProduto(elem)"> Editar </a>
@@ -14,7 +14,7 @@
         </div>
         }@empty{
         <div class="div-item-produto">
-            NENHUM PRODUTO REGISTRADO !!!
+            NENHUM PRODUTO REGISTRADO.
         </div>
         }
     </div>

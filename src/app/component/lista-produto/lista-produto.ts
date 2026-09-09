@@ -1,74 +1,59 @@
-import { Component, signal} from '@angular/core'
-import { ProdutoService } from "../../service/produto-service";
-import { Produto } from "../../models/Produtos";
-import { Router } from "../../../../node_modules/@angular/router/types/_router_module-chunk";
+import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Produto } from '../../models/Produtos';
+import { ProdutoService } from '../../service/produto-service';
 
 @Component({
-  selector: 'app-atleta-lista-component',
+  selector: 'app-lista-produto',
   imports: [],
-  templateUrl: './atleta-lista-component.html',
-  styleUrl: './atleta-lista-component.css',
+  templateUrl: './lista-produto.html',
+  styleUrl: './lista-produto.css',
 })
 export class ListaProduto {
-
   listaProdutos = signal<Produto[]>([]);
 
   constructor(
     private router: Router,
-    private http: ProdutoService,
+    private produtoService: ProdutoService
   ) {}
 
   ngOnInit() {
-    this.listarProduto();
+    this.listarProdutos();
   }
 
-  listarProduto() {
-    this.http.listarProduto().subscribe({
+  listarProdutos() {
+    this.produtoService.listarProdutos().subscribe({
       next: (dados) => {
-        this.listaProdutos.set([...dados].sort((a, b) => a.nome.localeCompare(b.nome)));
+        this.listaProdutos.set(
+          [...dados].sort((a, b) => (a.produto || '').localeCompare(b.produto || ''))
+        );
       },
       error: (msgErro) => {
-        console.log('Erro ao cadastrar o produto ', msgErro);
+        console.log('Erro ao listar os produtos ', msgErro);
       },
     });
   }
 
   excluirProduto(produto: Produto) {
-    if (confirm(`Deseja excluir ${Produto.nome} da competição? `)) {
-      this.http.excluirProduto(produto).subscribe({
+    if (confirm(`Deseja excluir ${produto.descricao_produto} da lista?`)) {
+      this.produtoService.excluirProduto(produto).subscribe({
         next: (dados) => {
-          this.listaProduto.update((elem) => elem.filter((a) => a.id !== produto.id));
+          this.listaProdutos.update((elem) =>
+            elem.filter((item) => item.idproduto !== produto.idproduto)
+          );
 
-          console.log('produto excluído com Sucesso ', dados);
+          console.log('Produto excluído com sucesso ', dados);
         },
         error: (msgErro) => {
-          console.log('Erro ao Excluir  o produto ', msgErro);
+          console.log('Erro ao excluir o produto ', msgErro);
         },
       });
     }
-    this.ngOnInit();
   }
 
-  buscarProduto(idProduto: Produto) {
-    this.router.navigate(['/cadastroproduto', idProduto]);
+  buscarProduto(produto: Produto) {
+    this.router.navigate(['/cadastroproduto', produto.idproduto]);
   }
-
-  MostrarIdade(data_nascimento: string): number {
-    {
-      const nascimento = new Date(data_nascimento + 'T00:00:00');
-      const hoje = new Date();
-
-      let idade = hoje.getFullYear() - nascimento.getFullYear();
-
-      const mes = hoje.getMonth() - nascimento.getMonth();
-
-      if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
-        idade--;
-      }
-      return idade;
-    }
-  }
-
-  
 }
 
