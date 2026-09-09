@@ -1,7 +1,10 @@
 <div id="div-form">
-    <h2>Cadastrar Produto</h2>
+    <h2>Criar Produto</h2>
 
     <form id="form-produto" (ngSubmit)="enviaDadosProduto()">
+        <label for="idsetor">ID do setor</label>
+        <input type="number" name="idsetor" id="idsetor" class="input01" required min="0" [(ngModel)]="idsetor" placeholder="Informe o ID do setor">
+
         <label for="produto">Nome</label>
         <input type="text" name="produto" id="produto" class="input01" required maxlength="80" [(ngModel)]="produto" placeholder="Informe o nome do produto">
 
@@ -17,7 +20,8 @@
         <label for="estoque">Estoque</label>
         <input type="number" name="estoque" id="estoque" class="input01" required min="0" [(ngModel)]="estoque" placeholder="Informe o estoque">
 
-        <button type="submit">{{ editar ? 'Salvar alterações' : 'Cadastrar' }}</button>
+        <button type="submit">{{ editar ? 'Salvar alterações' : 'Criar Produto' }}</button>
+        <button type="button" class="btn-voltar" (click)="voltarParaLista()">Voltar para Produtos Criados</button>
     </form>
 </div>
 
