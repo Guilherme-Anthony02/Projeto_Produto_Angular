@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Produto } from '../../models/Produtos';
 import { ProdutoService } from '../../service/produto-service';
@@ -13,6 +13,7 @@ import { ProdutoService } from '../../service/produto-service';
   styleUrl: './cadastro-produto.css',
 })
 export class CadastroProduto {
+  idsetor = 0;
   produto = '';
   descricao_produto = '';
   valor_unitario = 0;
@@ -25,6 +26,7 @@ export class CadastroProduto {
   constructor(
     private produtoService: ProdutoService,
     private route: ActivatedRoute,
+    private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -38,13 +40,14 @@ export class CadastroProduto {
   }
 
   exibeDados() {
-    console.log(this.produto, this.descricao_produto, this.valor_unitario, this.unidade, this.estoque);
+    console.log(this.idsetor, this.produto, this.descricao_produto, this.valor_unitario, this.unidade, this.estoque);
   }
 
   carregaCampo(idProduto: number) {
     this.produtoService.listarProduto(idProduto).subscribe({
       next: (objProduto) => {
         this.idProduto = objProduto.idproduto || idProduto;
+        this.idsetor = objProduto.idsetor || 0;
         this.produto = objProduto.produto;
         this.descricao_produto = objProduto.descricao_produto;
         this.valor_unitario = objProduto.valor_unitario;
@@ -62,6 +65,7 @@ export class CadastroProduto {
   enviaDadosProduto() {
     const produtoParaSalvar = new Produto();
 
+    produtoParaSalvar.idsetor = this.idsetor;
     produtoParaSalvar.produto = this.produto;
     produtoParaSalvar.descricao_produto = this.descricao_produto;
     produtoParaSalvar.valor_unitario = this.valor_unitario;
@@ -105,6 +109,7 @@ export class CadastroProduto {
   }
 
   limparAtributos() {
+    this.idsetor = 0;
     this.produto = '';
     this.descricao_produto = '';
     this.valor_unitario = 0;
@@ -112,6 +117,10 @@ export class CadastroProduto {
     this.estoque = 0;
     this.editar = false;
     this.idProduto = 0;
+  }
+
+  voltarParaLista() {
+    this.router.navigate(['/listaproduto']);
   }
 }
 
