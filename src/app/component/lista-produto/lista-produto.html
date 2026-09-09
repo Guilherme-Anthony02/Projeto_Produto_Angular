@@ -5,7 +5,7 @@
         @for (elem of listaProdutos(); track elem.idproduto) {
         <div class="item-produto">
             <span class="dados-produto">
-                {{elem.idproduto}} - {{elem.produto}} - {{elem.descricao_produto}} - {{elem.valor_unitario}} 
+                ID: {{elem.idproduto}} | Produto: {{elem.produto}} | Descrição: {{elem.descricao_produto}} | Valor unitário (R$): {{elem.valor_unitario}}
             </span>
             <span class="links-lista">
                 <a class="lnk-editar" (click)="buscarProduto(elem)"> Editar </a>
