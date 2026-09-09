@@ -55,5 +55,9 @@ export class ListaProduto {
   buscarProduto(produto: Produto) {
     this.router.navigate(['/cadastroproduto', produto.idproduto]);
   }
+
+  voltarParaHome() {
+    this.router.navigate(['/home']);
+  }
 }
 
