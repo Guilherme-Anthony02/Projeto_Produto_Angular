@@ -2,11 +2,12 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
-    "Projeto_PessoaBD": {
+    "Projeto_Produto": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Projeto_PessoaBD:build:production"
+              "buildTarget": "Projeto_Produto:build:production"
             },
             "development": {
-              "buildTarget": "Projeto_PessoaBD:build:development"
+              "buildTarget": "Projeto_Produto:build:development"
             }
           },
           "defaultConfiguration": "development"
