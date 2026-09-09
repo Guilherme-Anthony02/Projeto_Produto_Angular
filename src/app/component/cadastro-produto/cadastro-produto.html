@@ -1,24 +1,24 @@
-<div id = "div-form">
-    <h2> Cadastrar Produto </h2>
+<div id="div-form">
+    <h2>Cadastrar Produto</h2>
 
-    <form id = "form-produto">
+    <form id="form-produto" (ngSubmit)="enviaDadosProduto()">
         <label for="produto">Nome</label>
-        <input type="text" name="produto" id="produto" class="input01" required maxlength="80" placeholder="Informe o nome do Produto">
+        <input type="text" name="produto" id="produto" class="input01" required maxlength="80" [(ngModel)]="produto" placeholder="Informe o nome do produto">
 
-         <label for="descricao_produto">Descrição do Produto</label>
-        <input type="text" name="descricao_produto" id="descricao_produto" class="input01" required maxlength="80" placeholder="Informe a descrição do produto">
+        <label for="descricao_produto">Descrição do Produto</label>
+        <input type="text" name="descricao_produto" id="descricao_produto" class="input01" required maxlength="120" [(ngModel)]="descricao_produto" placeholder="Informe a descrição do produto">
 
-         <label for="valor_unitario">Qual o valor unitario?</label>
-        <input type="text" name="valor_unitario" id="valor_unitario" class="input01" required maxlength="80" placeholder="Informe o valor do produto">
+        <label for="valor_unitario">Valor unitário</label>
+        <input type="number" name="valor_unitario" id="valor_unitario" class="input01" required min="0" step="0.01" [(ngModel)]="valor_unitario" placeholder="Informe o valor do produto">
 
-           <label for="unidade">Unidades</label>
-        <input type="text" name="unidade" id="unidade" class="input01" required maxlength="80" placeholder="Informe a quantidade de unidade">
+        <label for="unidade">Unidade</label>
+        <input type="text" name="unidade" id="unidade" class="input01" required maxlength="80" [(ngModel)]="unidade" placeholder="Informe a unidade">
 
-    </form>       
-    </div>
-        
+        <label for="estoque">Estoque</label>
+        <input type="number" name="estoque" id="estoque" class="input01" required min="0" [(ngModel)]="estoque" placeholder="Informe o estoque">
 
+        <button type="submit">{{ editar ? 'Salvar alterações' : 'Cadastrar' }}</button>
+    </form>
+</div>
 
-        
-        
         
