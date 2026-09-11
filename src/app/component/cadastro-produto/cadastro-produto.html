@@ -3,7 +3,9 @@
 
     <form id="form-produto" (ngSubmit)="enviaDadosProduto()">
         <label for="idsetor">ID do setor</label>
-        <input type="number" name="idsetor" id="idsetor" class="input01" required min="0" [(ngModel)]="idsetor" placeholder="Informe o ID do setor">
+        <input type="radio" name="idsetor" id="idsetor" class="input01" value="1" [(ngModel)]="idsetor"> Setor A
+        <input type="radio" name="idsetor" id="idsetor" class="input01" value="2" [(ngModel)]="idsetor"> Setor B
+        <input type="radio" name="idsetor" id="idsetor" class="input01"  value="3" [(ngModel)]="idsetor"> Setor C
 
         <label for="produto">Nome</label>
         <input type="text" name="produto" id="produto" class="input01" required maxlength="80" [(ngModel)]="produto" placeholder="Informe o nome do produto">
@@ -15,7 +17,17 @@
         <input type="number" name="valor_unitario" id="valor_unitario" class="input01" required min="0" step="0.01" [(ngModel)]="valor_unitario" placeholder="Informe o valor do produto">
 
         <label for="unidade">Unidade</label>
-        <input type="text" name="unidade" id="unidade" class="input01" required maxlength="80" [(ngModel)]="unidade" placeholder="Informe a unidade">
+        <!--<input type="text" name="unidade" id="unidade" class="input01" required maxlength="80" [(ngModel)]="unidade" placeholder="Informe a unidade">-->
+        <select name = "unidade" id="unidade" class="input01" [(ngModel)] = "unidade" placeholdder = "Selecione a unidade">
+            <option value="kg">Quilograma</option>
+            <option value="g">Grama</option>
+            <option value="mg">Miligrama</option>
+            <option value="t">Tonelada</option>
+            <option value="l">Litro</option>
+            <option value="ml">Mililitro</option>
+            <option value="m3">Metro cubico</option>
+
+        </select>
 
         <label for="estoque">Estoque</label>
         <input type="number" name="estoque" id="estoque" class="input01" required min="0" [(ngModel)]="estoque" placeholder="Informe o estoque">
